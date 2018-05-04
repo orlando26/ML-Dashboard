@@ -10,6 +10,7 @@
 	<header> 
 		<%@ include file="template/header.jsp"%>
 		<script src="resources/js/index.js"></script>
+		<link rel="stylesheet" href="resources/css/styles.css">
 	</header>
 	<article>
 	<div class="container">

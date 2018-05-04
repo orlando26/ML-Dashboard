@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,8 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.mldashboard.util.FilesPath;
+
 /**
  * Servlet implementation class UploadServlet
  */
@@ -26,14 +29,14 @@ public class UploadServlet extends HttpServlet {
 	private static final String DATA_DIRECTORY = "resources/data";
 	private static final int MAX_MEMORY_SIZE = 1024 * 1024 * 8;
 	private static final int MAX_REQUEST_SIZE = 2048 * 2048;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UploadServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public UploadServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -60,8 +63,7 @@ public class UploadServlet extends HttpServlet {
 
 		// constructs the folder where uploaded file will be stored
 		String uploadFolder = getServletContext().getRealPath("") + DATA_DIRECTORY;
-		
-		System.out.println(uploadFolder);
+
 
 		// Create a new file upload handler
 		ServletFileUpload upload = new ServletFileUpload(factory);
@@ -82,13 +84,18 @@ public class UploadServlet extends HttpServlet {
 					File uploadedFile = new File(filePath);
 					System.out.println(filePath);
 					// saves the file to upload directory
+					item.write(new File(new FilesPath().getBaseFile()));
 					item.write(uploadedFile);
 				}
 			}
+			Scanner scanner = new Scanner(new File(new FilesPath().getBaseFile()));
+			String csvHeader = scanner.nextLine();
+			scanner.close();
+			String features[] = csvHeader.split("\\s*,\\s*");
+			int featuresCnt = features.length;
+			response.setContentType("text/html");
+			response.sendRedirect("pages/main.jsp?cnt=" + featuresCnt);
 
-		response.setContentType("text/html");
-		response.sendRedirect("pages/main.jsp");
-		
 		} catch (FileUploadException ex) {
 			throw new ServletException(ex);
 		} catch (Exception ex) {
