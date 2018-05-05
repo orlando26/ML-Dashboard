@@ -10,6 +10,7 @@
 	<header> 
 		<%@ include file="../template/header.jsp"%>
 		<script src="../resources/js/main.js"></script>
+		<script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 		<link rel="stylesheet" href="../resources/css/styles.css">
 	</header>
 	<article>
@@ -18,6 +19,10 @@
 				<button class="btn btn-outline-danger btn-block" type="button" id="btn-shuffle">shuffle</button>
 				<button class="btn btn-outline-danger btn-block" type="button" id="btn-segregate">segregate</button>
 				<button class="btn btn-outline-danger btn-block" type="button" id="btn-normalize">normalize</button>
+				<button class="btn btn-outline-danger btn-block" type="button" id="btn-train">train network</button>
+				
+				<div id="plotError" style="width: 100%"></div>
+				<div id="plotExperiments" style="width: 100%"></div>
 			</form>
 		</div>
 	</article>
@@ -44,8 +49,8 @@
           <div class="input-group-text"><%=i %></div>
         </div>
         <select type="text" class="form-control feature-select" id="inlineFormInputGroup" placeholder="Feature type">
-        	<option>Numeric</option>
-        	<option>Not numeric</option>
+        	<option>Continuous</option>
+        	<option>Not Continuous</option>
         	<option>Ignore</option>
         </select>
        
@@ -55,7 +60,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id="clode-modal" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="ok-modal">Save changes</button>
+        <button type="button" class="btn btn-primary" id="ok-modal">Create Network</button>
       </div>
     </div>
   </div>

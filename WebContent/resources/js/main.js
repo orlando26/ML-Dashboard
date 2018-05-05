@@ -1,17 +1,40 @@
 var features = [];
-var aa = 'jkhkj';
+var errors = [];
 $(document).ready(function(){
+
+	$('#btn-shuffle').click(function(){
+		var btn = $(this).text();
+		$.post('/ml-dashboard/NetworkServlet',{
+			btnPressed : 'shuffle'
+		});
+	});
 	
+	$('#btn-segregate').click(function(){
+		var btn = $(this).text();
+		$.post('/ml-dashboard/NetworkServlet',{
+			btnPressed : 'segregate'
+		});
+	});
 	
+	$('#btn-train').click(function(){
+		$.post('/ml-dashboard/NetworkServlet',{
+			btnPressed : 'train'
+		}, function(response){
+			errors = [];
+			errors = response;
+			plotErrors();
+		});
+	});
+
 	$('#btn-normalize').click(function(){
 		var btn = $(this).text();
 		$.post('/ml-dashboard/NetworkServlet',{
-			btnPressed : btn
+			btnPressed : 'setFeaturesType'
 		}, function(response){
 			response.forEach(function(val){
 				feature = {};
 				feature['name'] = val;
-				feature['type'] = 'numeric';
+				feature['type'] = 'Continuous';
 				features.push(feature);
 			});
 			var featuresCnt = features.length;
@@ -23,19 +46,43 @@ $(document).ready(function(){
 			$('#featuresModal').modal();
 		});
 	});
-	
+
 	$('#ok-modal').click(function(){
 		console.log(features);
+		var object = JSON.stringify(features);
+		$.post('/ml-dashboard/NetworkServlet',{
+			btnPressed : 'normalize',
+			featureTypes : object
+		});
 	});
-	
+
 	$('.feature-select').change(function(){
 		var featureVal = $(this).val();
 		var featureName = $(this).prev().find('.input-group-text').text();
 		var idx = featureName.split(":")[0];
-		console.log(featureVal);
-		console.log(featureName);
 		features[idx].type = featureVal;
 	});
-	
-	
+
 });
+
+function plotErrors() {
+
+	var trace1 = {
+			y: errors,
+			type: 'lines+markers'
+	};
+
+	var data = [trace1];
+
+	var layout = {
+			title: 'Errors',
+			xaxis: {
+				title: 'epoch'
+			},
+			yaxis: {
+				title: 'Error'
+			}
+	}
+
+	Plotly.newPlot('plotError', data, layout);
+}
