@@ -20,8 +20,21 @@
 				<button class="btn btn-outline-danger btn-block" type="button" id="btn-segregate">segregate</button>
 				<button class="btn btn-outline-danger btn-block" type="button" id="btn-normalize">normalize</button>
 				<button class="btn btn-outline-danger btn-block" type="button" id="btn-train">train network</button>
-				
-				<div id="plotError" style="width: 100%"></div>
+				<br>
+				<div class="row" id="errors-div" style="display:none">
+    			<div class="col-5">
+    				<h3>Errors:</h3><p></p>
+      				<div class="card" id="errors-card">
+      					
+  						<div class="card-body" style="height:20em;overflow-y: scroll;">
+    						<ul id="errors"></ul>
+  						</div>
+					</div>
+    			</div>
+    			<div class="col-7">
+      				<div id="plotError" style="width: 100%"></div>
+    			</div>
+  				</div>
 				<div id="plotExperiments" style="width: 100%"></div>
 			</form>
 		</div>
