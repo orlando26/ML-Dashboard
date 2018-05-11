@@ -16,9 +16,9 @@
 	<article>
 		<div class="container">
 			<form>
-				<button class="btn btn-outline-danger btn-block" type="button" id="btn-shuffle">shuffle</button>
+				
 				<button class="btn btn-outline-danger btn-block" type="button" id="btn-segregate">segregate</button>
-				<button class="btn btn-outline-danger btn-block" type="button" id="btn-normalize">normalize</button>
+				<button class="btn btn-outline-danger btn-block" type="button" id="btn-normalize">Create Network</button>
 				<button class="btn btn-outline-danger btn-block" type="button" id="btn-train">train network</button>
 				<br>
 				<div class="row" id="errors-div" style="display:none">
@@ -48,7 +48,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Features/labels type</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Normalize values</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
