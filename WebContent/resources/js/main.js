@@ -22,6 +22,11 @@ $(document).ready(function(){
 		}, function(response){
 			errors = [];
 			errors = response;
+			errors.forEach(function(error, idx, arr){
+				errorsStr = 'Epoch ' + (idx+1) + ' - ' + 'Error: ' + error;
+				$('#errors').append("<li>" + errorsStr + "</li>");
+			});
+			$('#errors-div').show();
 			plotErrors();
 		});
 	});
@@ -53,6 +58,8 @@ $(document).ready(function(){
 		$.post('/ml-dashboard/NetworkServlet',{
 			btnPressed : 'normalize',
 			featureTypes : object
+		}, function(response){
+			$('#featuresModal').modal('toggle');
 		});
 	});
 
@@ -75,7 +82,6 @@ function plotErrors() {
 	var data = [trace1];
 
 	var layout = {
-			title: 'Errors',
 			xaxis: {
 				title: 'epoch'
 			},

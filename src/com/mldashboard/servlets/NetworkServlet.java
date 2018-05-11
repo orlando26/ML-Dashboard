@@ -80,8 +80,9 @@ public class NetworkServlet extends HttpServlet {
 		String btnPressed = request.getParameter("btnPressed");
 		System.out.println(btnPressed);
 		if(btnPressed.equals("shuffle")){
-			shuffle();
+			
 		}else if(btnPressed.equals("segregate")){
+			shuffle();
 			segregate();
 		}else if(btnPressed.equals("setFeaturesType")){
 			setFeaturesType(request, response);
