@@ -44,7 +44,7 @@ $(document).ready(function(){
 			});
 			var featuresCnt = features.length;
 			console.log(features);
-			$('.input-group-text').each(function(){
+			$('.normalize-select-text').each(function(){
 				var num = parseInt($(this).text());
 				$(this).text(num + ':' + features[num].name);
 			});
