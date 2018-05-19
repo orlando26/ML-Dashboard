@@ -27,8 +27,8 @@ public class UploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final String DATA_DIRECTORY = "resources/data";
-	private static final int MAX_MEMORY_SIZE = 1024 * 1024 * 8;
-	private static final int MAX_REQUEST_SIZE = 2048 * 2048;
+	private static final int MAX_MEMORY_SIZE = 2048 * 2048 * 8;
+	private static final int MAX_REQUEST_SIZE = 2048 * 2048 * 2;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

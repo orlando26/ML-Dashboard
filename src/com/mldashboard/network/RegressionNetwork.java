@@ -18,6 +18,7 @@ import org.encog.engine.network.activation.ActivationTANH;
 import org.encog.ml.data.MLDataSet;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.layers.BasicLayer;
+import org.encog.neural.networks.training.propagation.back.Backpropagation;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 import org.encog.persist.EncogDirectoryPersistence;
 import org.encog.util.arrayutil.NormalizationAction;
@@ -90,9 +91,9 @@ public class RegressionNetwork {
 		String csvHeader = scanner.nextLine();
 		String features[] = csvHeader.split("\\s*,\\s*");
 		scanner.close();
-		network.addLayer(new BasicLayer(new ActivationLinear(), true, features.length - 1));
+		network.addLayer(new BasicLayer(new ActivationLinear(), true, 13));
 		network.addLayer(new BasicLayer(new ActivationTANH(), true, 6));
-		network.addLayer(new BasicLayer(new ActivationTANH(), true, 1));
+		network.addLayer(new BasicLayer(new ActivationTANH(), true, 2));
 		network.getStructure().finalizeStructure();
 		network.reset();
 		EncogDirectoryPersistence.saveObject(new File(networkFile), network);
@@ -111,7 +112,7 @@ public class RegressionNetwork {
 			System.out.println("epoch: " + epoch + " error: " + train.getError());
 			errors.add(train.getError());
 			epoch++;
-		}while(train.getError() > 0.01);
+		}while(epoch < 200);
 		EncogDirectoryPersistence.saveObject(new File(filesPath.getTrainedNetworkFile()), network);
 		return errors;
 	}
@@ -123,7 +124,7 @@ public class RegressionNetwork {
 			action = NormalizationAction.Normalize;
 			break;
 		case "Not Continuous":
-			action = NormalizationAction.Equilateral;
+			action = NormalizationAction.OneOf;
 			break;
 		case "Ignore":
 			action = NormalizationAction.Ignore;

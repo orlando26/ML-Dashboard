@@ -98,30 +98,44 @@
 						</div>
 						<div class="tab-pane fade" id="profile" role="tabpanel"
 							aria-labelledby="profile-tab">
+							<%for(int i = 1;i <= 3;i++){ %>
 							<div class="card" id="errors-card">
 
 								<div class="card-body">
-									<h5 class="card-title">1st layer</h5>
-									<label class="sr-only" for="inlineFormInputGroup">Feature
-										type</label>
-									<div class="input-group mb-2">
-										<div class="input-group-prepend">
-											<div class="input-group-text">Activation function</div>
+									<h5 class="card-title">layer <%=i %>:</h5>
+									<div class="row">
+										<div class="col-sm-auto">
+											<label class="mr-sm-2" for="activationFunction-select">Activation function:</label>
+											<div class="input-group mb-2">
+												<div class="input-group-prepend">
+													<div class="input-group-text">f(x)</div>
+												</div>
+												<select class="form-control feature-select"
+													id="activationFunction-select" placeholder="Feature type">
+													<option>Linear</option>
+													<option>RELU</option>
+													<option>Sigmoid</option>
+													<option>Gauss</option>
+													<option>TanH</option>
+												</select>
+											</div>
 										</div>
-										<select type="text" class="form-control feature-select"
-											id="inlineFormInputGroup" placeholder="Feature type">
-											<option>Continuous</option>
-											<option>Not Continuous</option>
-											<option>Ignore</option>
-										</select>
-									</div>
-									<div class="form-check">
-										<input type="checkbox" class="form-check-input"
-											id="exampleCheck1"> <label class="form-check-label"
-											for="exampleCheck1">Bias</label>
+										<div class="col">
+											 <label class="mr-sm-2" for="neurons-spinner">Neurons:</label>
+											<input id="neurons-spinner" class="form-control input-sm" type="number" step="1">
+										</div>
+										<div class="col">
+											<br>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input"
+													id="customCheck1"> <label
+													class="custom-control-label" for="customCheck1">Bias</label>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
+							<%} %>
 						</div>
 					</div>
 				</div>
